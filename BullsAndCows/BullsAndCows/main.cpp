@@ -4,20 +4,14 @@
 using namespace std;
 
 void PrintIntro();
-string GetGuessAndPrintBack();
+void PlayGame();
+string GetGuess();
 
 // entry point for the program
 int main()
 {
 	PrintIntro();
-
-	// loops for number of turns and asks for guesses
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
-	{
-		GetGuessAndPrintBack();
-		cout << endl;
-	}
+	PlayGame();
 
 	return 0;
 }
@@ -31,15 +25,24 @@ void PrintIntro()
 	return;
 }
 
-string GetGuessAndPrintBack()
+void PlayGame()
+{
+	// loops for number of turns and asks for guesses
+	constexpr int NUMBER_OF_TURNS = 5;
+	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
+	{
+		string Guess = GetGuess();
+		cout << "You guessed: " << Guess << endl;
+		cout << endl;
+	}
+	return;
+}
+
+string GetGuess()
 {
 	string Guess = "";
 	cout << "Please enter a guess: ";
 	getline(cin, Guess);
 
-	// repeat the guess back to player
-	cout << "You guessed: " << Guess;
-	cout << endl;
-	
 	return Guess;
 }
