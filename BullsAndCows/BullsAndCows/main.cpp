@@ -3,31 +3,37 @@
 
 using namespace std;
 
+void PrintIntro();
+string GetGuessAndPrintBack();
+
+// entry point for the program
 int main()
 {
-	// introduce the game
-	constexpr int WORD_LENGTH = 5;	
-	cout << "Welcome to Bulls and Cows!" << endl;
-	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thining of?" << endl;
+	PrintIntro();
+	GetGuessAndPrintBack();
+	GetGuessAndPrintBack();
 
-	// get guess from player
+	return 0;
+}
+
+void PrintIntro()
+{
+	constexpr int WORD_LENGTH = 5;
+	cout << "Welcome to Bulls and Cows!" << endl;
+	cout << "Can you guess the " << WORD_LENGTH << " letter isogram?" << endl;
+	return;
+}
+
+string GetGuessAndPrintBack()
+{
 	string Guess = "";
 	cout << "Please enter a guess: ";
 	getline(cin, Guess);
 	cout << endl;
+
+	// repeat the guess back to player
+	cout << "You guessed: " << Guess;
+	cout << endl;
 	
-	// repeat the guess back to player
-	cout << "You guessed: " << Guess;
-	cout << endl;
-
-	// get guess from player
-	cout << "Please enter a guess: ";
-	getline(cin, Guess);
-	cout << endl;
-
-	// repeat the guess back to player
-	cout << "You guessed: " << Guess;
-	cout << endl;
-
-	return 0;
+	return Guess;
 }
