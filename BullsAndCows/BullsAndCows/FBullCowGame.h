@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class FBullCowGame
 {
 public:
@@ -7,7 +9,7 @@ public:
 	int GetMaxTries();
 	int GetCurrentTry();
 	bool IsGameWon();
-	bool CheckGuessValidity(); // TODO make a better return value
+	bool CheckGuessValidity(std::string); // TODO make a better return value
 
 private:
 	int MyCurrentTry;
