@@ -16,12 +16,15 @@ class FBullCowGame
 
 public:
 	FBullCowGame(); // constructor
+
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
+	int32 GetHiddenWordLength() const;
+
 	bool IsGameWon() const;
-	
-	void Reset(); // TODO make a better return value
-	bool CheckGuessValidity(FString); // TODO make a better return value
+	bool CheckGuessValidity(FString) const; // TODO make a better return value
+
+	void Reset(); // TODO make a better return value	
 	FBullCowCount SubmitGuess(FString);
 
 private:

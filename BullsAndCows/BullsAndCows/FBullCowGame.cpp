@@ -7,16 +7,17 @@ FBullCowGame::FBullCowGame()
 
 int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 8;
-	MyMaxTries = MAX_TRIES;
-
 	const FString HIDDEN_WORD = "planet";
-	MyHiddenWord = HIDDEN_WORD;
 
+	MyMaxTries = MAX_TRIES;
+	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
+
 	return;
 }
 
@@ -25,7 +26,7 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(FString)
+bool FBullCowGame::CheckGuessValidity(FString) const
 {
 	return false;
 }
@@ -39,29 +40,32 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 	// setup return variable
 	FBullCowCount BullCowCount;
 
-	// loop through all letters in the guess
-	int32 HiddenWordLength = MyHiddenWord.length(); // calls the 'length' method on the MyHiddenWord variable, returns the numeric value of its length and stores it in the new variable
+	// calls the 'length' method on the MyHiddenWord variable, returns the numeric value of its length and stores it in the new variable
+	int32 HiddenWordLength = MyHiddenWord.length(); 
 	
-	for (int32 HWChar = 0; HWChar < HiddenWordLength; HWChar++) // run a loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "HWChar"
+	// run a loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "HWChar"
+	for (int32 HWChar = 0; HWChar < HiddenWordLength; HWChar++) 
 	{											 
-
-		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) // run a second loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "GChar"
+		// run a second loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "GChar"
+		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) 
 		{											
-			
-			if (Guess[GChar] == MyHiddenWord[HWChar]) // if any letter returned by running the incremented index-number lookup on the Guess word (eg. Guess[2] matches any letter returned by doing the same to the Hidden word, proceed to the following conditions
+			// if any letter returned by running the incremented index-number lookup on the Guess word (eg. Guess[2] matches any letter returned by doing the same to the Hidden word, proceed to the following conditions
+			if (Guess[GChar] == MyHiddenWord[HWChar]) 
 			{
-
-				if (HWChar == GChar) // if the index-numbers are the same for the matching letters
+				// if the index-numbers are the same for the matching letters
+				if (HWChar == GChar) 
 				{
-					BullCowCount.Bulls++; // increment the 'Bulls' in our object of FBullCowCount type
+					// increment the 'Bulls' in our object of FBullCowCount type
+					BullCowCount.Bulls++; 
 				}
-			
-				else // if the index-numbers are NOT the same for the matching letters
+				// if the index-numbers are NOT the same for the matching letters
+				else 
 				{
-					BullCowCount.Cows++; // increment the 'Cows'
+					// increment the 'Cows'
+					BullCowCount.Cows++; 
 				}
 
-			} // if No letters are the same in either word, END the bigger if-loop
+			} // if No letters are matching in either word, END the bigger if-loop
 		}
 	}
 	return BullCowCount;
