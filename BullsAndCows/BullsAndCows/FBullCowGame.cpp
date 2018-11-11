@@ -48,22 +48,19 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 }
 
 // recieves a VALID guess, increments turn, and returns count
-FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
-	// increment the turn number
 	MyCurrentTry++;
-
-	// setup return variable
 	FBullCowCount BullCowCount;
 
 	// calls the 'length' method on the MyHiddenWord variable, returns the numeric value of its length and stores it in the new variable
-	int32 HiddenWordLength = MyHiddenWord.length(); 
+	int32 WordLength = MyHiddenWord.length(); // assuming same length as guess
 	
 	// run a loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "HWChar"
-	for (int32 HWChar = 0; HWChar < HiddenWordLength; HWChar++) 
+	for (int32 HWChar = 0; HWChar < WordLength; HWChar++) 
 	{											 
 		// run a second loop, start counting from zero and keep increasing the count by one each time the loop runs until it's the same as the length of the hidden word, then stop looping. Name this count-number "GChar"
-		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) 
+		for (int32 GChar = 0; GChar < WordLength; GChar++) 
 		{											
 			// if any letter returned by running the incremented index-number lookup on the Guess word (eg. Guess[2] matches any letter returned by doing the same to the Hidden word, proceed to the following conditions
 			if (Guess[GChar] == MyHiddenWord[HWChar]) 
