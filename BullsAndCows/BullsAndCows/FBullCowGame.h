@@ -4,11 +4,13 @@
 
 class FBullCowGame
 {
-public:
+
+public:	
+	int GetMaxTries() const;
+	int GetCurrentTry() const;
+	bool IsGameWon() const;
+	
 	void Reset(); // TODO make a better return value
-	int GetMaxTries();
-	int GetCurrentTry();
-	bool IsGameWon();
 	bool CheckGuessValidity(std::string); // TODO make a better return value
 
 private:
