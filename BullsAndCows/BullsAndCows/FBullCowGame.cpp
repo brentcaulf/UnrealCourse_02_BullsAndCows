@@ -7,10 +7,17 @@ FBullCowGame::FBullCowGame()
 	Reset();
 }
 
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
+
+int32 FBullCowGame::GetMaxTries() const 
+{ 
+	TMap<int32, int32> WordLengthToMaxTries{ {3,6}, {4,8}, {5,10}, {6,12}, {7,14}, {8,16}, {9,18}, {10,20}, {11,22}, {12,24}, {13,26} };
+	
+	return WordLengthToMaxTries[MyHiddenWord.length()]; 
+}
 
 bool FBullCowGame::IsIsogram(FString Word) const
 {
@@ -49,10 +56,8 @@ bool FBullCowGame::IsLowercase(FString Word) const
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 8;
 	const FString HIDDEN_WORD = "planet";
 
-	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
 	bGameIsWon = false;
