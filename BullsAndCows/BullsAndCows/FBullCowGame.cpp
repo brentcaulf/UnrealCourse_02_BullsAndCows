@@ -1,12 +1,24 @@
+#pragma once
+
 #include "FBullCowGame.h"
 #include <map>
-#define TMap std::map
+#define TMap std::map // Unreal friendly syntax
 
 FBullCowGame::FBullCowGame()
 {
 	Reset();
 }
 
+void FBullCowGame::Reset()
+{
+	const FString HIDDEN_WORD = "planet"; // this MUST be a isogram
+
+	MyHiddenWord = HIDDEN_WORD;
+	MyCurrentTry = 1;
+	bGameIsWon = false;
+
+	return;
+}
 
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
@@ -54,27 +66,15 @@ bool FBullCowGame::IsLowercase(FString Word) const
 	}
 }
 
-void FBullCowGame::Reset()
-{
-	const FString HIDDEN_WORD = "planet";
-
-	MyHiddenWord = HIDDEN_WORD;
-	MyCurrentTry = 1;
-	bGameIsWon = false;
-
-	return;
-}
-
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
-{
-	
+{	
 	if (!IsIsogram(Guess)) // if the guess isn't an isogram
 	{
 		return EGuessStatus::Not_Isogram;
 	}
 	else if (!IsLowercase(Guess)) // if the guess isn't all lowercase
 	{
-		return EGuessStatus::Not_Lowercase; // TODO write function
+		return EGuessStatus::Not_Lowercase;
 	}
 	else if (Guess.length() != GetHiddenWordLength()) // if the guess is the wrong length
 	{
