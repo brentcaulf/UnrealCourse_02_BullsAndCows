@@ -15,13 +15,19 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 bool FBullCowGame::IsIsogram(FString Word) const
 {
 	// treat 0 and 1 letter words as isograms
-
-	// loop through all letters of the word
-		// if the letter is in the map
-			// we do NOT have an isogram
-		// otherwise
-			// add the letter to the map as seen (true)
+	if (Word.length() <= 1) { return true; }
 	
+	TMap<char, bool> LetterSeen; // map setup
+	for (auto Letter : Word)	// for all letters of the word
+	{
+		Letter = tolower(Letter); // handle mixed case letters
+		
+		if (LetterSeen[Letter]) { return false; } // if the letter is in the map we do NOT have an isogram
+		else // otherwise
+		{
+			LetterSeen[Letter] = true; // add the letter to the map as seen (true)
+		}	
+	}
 	return true; // for example in cases where /0 is entered
 }
 
